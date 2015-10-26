@@ -1,0 +1,79 @@
+#!/bin/bash
+#--------------------------------------------------
+#PART_TABLE VARIABLE WILL PASTED HERE FROM ais.sh |
+#--------------------------------------------------
+
+
+#--------------
+#SET HOSTNAME |
+#--------------
+read -p "Hostname: " HOSTNAME
+echo "$HOSTNAME" > /etc/hostname
+
+#---------------
+#SET LOCALTIME |
+#---------------
+ln -sf /usr/share/zoneinfo/Europe/Zurich /etc/localtime
+
+#--------------------
+#SET HWCLOCK TO UTC |
+#--------------------
+hwclock --systohc --utc
+
+#------------
+#SET LOCALE |
+#------------
+sed -i 's/#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
+locale-gen
+
+#---------------------
+#SET LOCALE VARIABLE |
+#---------------------
+echo LANG=en_US.UTF-8 > /etc/locale.conf
+
+#--------------
+#SET VCONSOLE |
+#--------------
+echo -e "KEYMAP=de_CH-latin1\nFONT=lat9w-16" > /etc/vconsole.conf
+
+#--------------------
+#SET NETWORK DEVICE |
+#--------------------
+NETWORK_DEVICE=$(ip a | grep 'state UP' | awk -F': ' '{print $2}')
+systemctl enable dhcpcd@"$NETWORK_DEVICE"
+
+#----------------
+#SET MKINITCPIO |
+#----------------
+sed -i 's/HOOKS="base udev autodetect modconf block filesystems keyboard fsck"/HOOKS="base udev autodetect modconf block keymap encrypt lvm2 filesystems keyboard fsck"/' /etc/mkinitcpio.conf
+mkinitcpio -p linux
+
+#-------------------
+#SET ROOT PASSWORD |
+#-------------------
+echo -e "root password: "
+passwd
+
+#--------------------
+#INSTALL BOOTLOADER |
+#--------------------
+if [[ "$PART_TABLE" = "mbr" ]]
+  then
+  pacman -S syslinux --noconfirm
+  syslinux-install_update -i -a -m
+elif [[ "$PART_TABLE" = "gpt" ]]
+  then
+  pacman -S syslinux efibootmgr --noconfirm
+  mkdir -p /boot/EFI/syslinux
+  cp -r /usr/lib/syslinux/efi64/* /boot/EFI/syslinux
+  efibootmgr -c -d /dev/sda -p 1 -l /EFI/syslinux/syslinux.efi -L "Arch Linux"
+fi
+sed -i '54s/.*/    APPEND root=\/dev\/mapper\/archlinux-rootvol cryptdevice=\/dev\/sda2:archlinux rw/' /boot/syslinux/syslinux.cfg
+sed -i '60s/.*/    APPEND root=\/dev\/mapper\/archlinux-rootvol cryptdevice=\/dev\/sda2:archlinux rw/' /boot/syslinux/syslinux.cfg
+
+echo -e "\nExit from the chroot environment by running exit or pressing Ctrl+D."
+echo -e "\nPartitions will be unmounted automatically by systemd on shutdown.\nYou may however unmount manually as a safety measure with \"umount -R /mnt\" after exiting the chroot environment."
+echo -e "\nAfter reboot you can login as root and start with the installation of your software with \"./software_stack.sh\""
+cp software_stack.sh /root
+rm software_stack.sh
+rm chroot.sh
