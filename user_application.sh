@@ -11,14 +11,11 @@ sed -i 's/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/' /etc/sudoers
 #Graphics |
 #----------
 read -p "intel, nvidia or amd graphic chip? : " GRAPHICS
-if [[ "$GRAPHICS" = "intel" ]]
-  then
+if [[ "$GRAPHICS" = "intel" ]]; then
   pacman -S --noconfirm xf86-video-intel mesa-libgl libva-intel-driver libva
-elif [[ "$GRAPHICS" = "nvidia" ]]
-  then
+elif [[ "$GRAPHICS" = "nvidia" ]]; then
   pacman -S --noconfirm xf86-video-nouveau mesa-libgl
-elif [[ "$GRAPHICS" = "amd" ]]
-  then
+elif [[ "$GRAPHICS" = "amd" ]]; then
   pacman -S --noconfirm xf86-video-ati mesa-libgl mesa-vdpau
 fi
 
@@ -30,7 +27,7 @@ pacman -S --noconfirm vim bash-completion openssh rsync wget bind-tools xf86-inp
 #---------------------
 #DESKTOP ENVIRONMENT |
 #---------------------
-pacman -S --noconfirm gnome devhelp gedit evolution gnome-builder cheese file-roller gnome-clocks gnome-documents gnome-maps gnome-music gnome-photos gnome-tweak-tool gnome-weather nautilus-sendto seahorse network-manager-applet gvfs-mtp gvfs-google gnome-calendar gnome-characters gnome-initial-setup system-config-printer
+pacman -S --noconfirm gnome devhelp gedit evolution gnome-builder cheese file-roller gnome-clocks gnome-documents gnome-maps gnome-music gnome-photos gnome-tweak-tool gnome-weather nautilus-sendto seahorse network-manager-applet gvfs-mtp gvfs-google gnome-calendar gnome-characters gnome-initial-setup gnome-getting-started-docs system-config-printer
 
 #--------------
 #APPLICATIONS |
@@ -70,4 +67,4 @@ makepkg -si --noconfirm
 cd ~
 rm -r build
 EOF
-rm /root/software_stack.sh
+rm /root/user_application.sh

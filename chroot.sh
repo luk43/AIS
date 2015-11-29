@@ -1,13 +1,13 @@
 #!/bin/bash
-#--------------------------------------------------
-#PART_TABLE VARIABLE WILL PASTED HERE FROM ais.sh |
-#--------------------------------------------------
+#------------------------------------------------------
+#PART_TABLE VARIABLE WILL PASTED HERE FROM install.sh |
+#------------------------------------------------------
 
 
-#--------------
-#SET HOSTNAME |
-#--------------
-read -p "Hostname: " HOSTNAME
+#----------------------------------------------------
+#SET HOSTNAME, IT WILL PASTED HERE  FROM install.sh |
+#----------------------------------------------------
+
 echo "$HOSTNAME" > /etc/hostname
 
 #---------------
@@ -57,12 +57,10 @@ passwd
 #--------------------
 #INSTALL BOOTLOADER |
 #--------------------
-if [[ "$PART_TABLE" = "mbr" ]]
-  then
+if [[ "$PART_TABLE" = "mbr" ]]; then
   pacman -S syslinux --noconfirm
   syslinux-install_update -i -a -m
-elif [[ "$PART_TABLE" = "gpt" ]]
-  then
+elif [[ "$PART_TABLE" = "gpt" ]]; then
   pacman -S syslinux efibootmgr --noconfirm
   mkdir -p /boot/EFI/syslinux
   cp -r /usr/lib/syslinux/efi64/* /boot/EFI/syslinux
@@ -73,7 +71,7 @@ sed -i '60s/.*/    APPEND root=\/dev\/mapper\/archlinux-rootvol cryptdevice=\/de
 
 echo -e "\nExit from the chroot environment by running exit or pressing Ctrl+D."
 echo -e "\nPartitions will be unmounted automatically by systemd on shutdown.\nYou may however unmount manually as a safety measure with \"umount -R /mnt\" after exiting the chroot environment."
-echo -e "\nAfter reboot you can login as root and start with the installation of your software with \"./software_stack.sh\""
-cp software_stack.sh /root
+echo -e "\nAfter reboot you can login as root and start with the installation of your software with \"./user_application.sh\""
+cp user_application.sh /root
 rm software_stack.sh
 rm chroot.sh
