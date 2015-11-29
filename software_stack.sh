@@ -25,12 +25,12 @@ fi
 #--------------
 #COMMON STUFF |
 #--------------
-pacman -S --noconfirm vim bash-completion openssh rsync wget bind-tools xf86-input-synaptics networkmanager libmtp mtpfs ntfs-3g dosfstools xfsprogs git
+pacman -S --noconfirm vim bash-completion openssh rsync wget bind-tools xf86-input-synaptics networkmanager libmtp mtpfs ntfs-3g dosfstools xfsprogs git cups ghostscript gsfonts
 
 #---------------------
 #DESKTOP ENVIRONMENT |
 #---------------------
-pacman -S --noconfirm gnome devhelp gedit evolution gnome-builder cheese file-roller gnome-clocks gnome-documents gnome-maps gnome-music gnome-photos gnome-tweak-tool gnome-weather nautilus-sendto seahorse network-manager-applet gvfs-mtp gvfs-google gnome-calendar gnome-characters
+pacman -S --noconfirm gnome devhelp gedit evolution gnome-builder cheese file-roller gnome-clocks gnome-documents gnome-maps gnome-music gnome-photos gnome-tweak-tool gnome-weather nautilus-sendto seahorse network-manager-applet gvfs-mtp gvfs-google gnome-calendar gnome-characters gnome-initial-setup system-config-printer
 
 #--------------
 #APPLICATIONS |
@@ -49,6 +49,7 @@ NETWORK_DEVICE=$(ip a | grep 'state UP' | awk -F': ' '{print $2}')
 systemctl disable dhcpcd@"$NETWORK_DEVICE"
 systemctl enable NetworkManager.service
 systemctl enable gdm.service
+systemctl enable org.cups.cupsd.service
 
 #--------
 #YAOURT |
@@ -69,4 +70,4 @@ makepkg -si --noconfirm
 cd ~
 rm -r build
 EOF
-rm "$PWD"/software_stack.sh
+rm /root/software_stack.sh
