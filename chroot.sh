@@ -10,10 +10,11 @@
 
 echo "$HOSTNAME" > /etc/hostname
 
-#---------------
-#SET LOCALTIME |
-#---------------
-ln -sf /usr/share/zoneinfo/Europe/Zurich /etc/localtime
+#-----------------------------------------------------
+#SET LOCALTIME, IT WILL PASTED HERE  FROM install.sh |
+#-----------------------------------------------------
+
+ln -sf /usr/share/zoneinfo/"$LOCALTIME" /etc/localtime
 
 #--------------------
 #SET HWCLOCK TO UTC |
@@ -31,10 +32,11 @@ locale-gen
 #---------------------
 echo LANG=en_US.UTF-8 > /etc/locale.conf
 
-#--------------
-#SET VCONSOLE |
-#--------------
-echo -e "KEYMAP=de_CH-latin1\nFONT=lat9w-16" > /etc/vconsole.conf
+#----------------------------------------------------
+#SET VCONSOLE, IT WILL PASTED HERE  FROM install.sh |
+#----------------------------------------------------
+
+echo -e "KEYMAP="$KEYMAP"\nFONT=lat9w-16" > /etc/vconsole.conf
 
 #--------------------
 #SET NETWORK DEVICE |
@@ -73,5 +75,5 @@ echo -e "\nExit from the chroot environment by running exit or pressing Ctrl+D."
 echo -e "\nPartitions will be unmounted automatically by systemd on shutdown.\nYou may however unmount manually as a safety measure with \"umount -R /mnt\" after exiting the chroot environment."
 echo -e "\nAfter reboot you can login as root and start with the installation of your software with \"./user_application.sh\""
 cp user_application.sh /root
-rm software_stack.sh
+rm user_application.sh
 rm chroot.sh
