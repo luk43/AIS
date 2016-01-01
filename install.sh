@@ -8,7 +8,7 @@ ZONE="Europe"
 SUBZONE="Zurich"
 
 #KEYMAP; 'localectl list-keymaps' lists all available options
-KEYMAP="de_CH⁻latin1"
+KEYMAP="de_CH-latin1"
 
 #DON'T CHANGE ANYTHING BELOW THE LINE
 #-------------------------------------------------------------------------------
