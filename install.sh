@@ -1,4 +1,18 @@
 #!/bin/bash
+#-------------------------------------------------------
+#LOCALE OPTIONS WHICH WILL BE SET MANUALLY BY THE USER |
+#-------------------------------------------------------
+
+#TIMEZONE; you can find yours with 'tzselect'
+ZONE="Europe"
+SUBZONE="Zurich"
+
+#KEYMAP; 'localectl list-keymaps' lists all available options
+KEYMAP="de_CH⁻latin1"
+
+#DON'T CHANGE ANYTHING BELOW THE LINE
+#-------------------------------------------------------------------------------
+
 #-----------------
 #MAIN INFORMATION|
 #-----------------
@@ -7,32 +21,6 @@ read -p "root (/) volume size (e.g 20G): " ROOT
 read -p "Swap volume size (e.g 4G) [empty = auto]: " RAM
 read -p "mbr (BIOS) or gpt (UEFI)?: " PART_TABLE
 read -p "Hostname: " HOSTNAME
-sed -i "10s/.*/HOSTNAME="$HOSTNAME"/" chroot.sh
-
-echo -e "\nTo list localtime options type \"list\""
-read -p "Continent (e.g Europe): " CONTINENT
-while [ "$CONTINENT" = "list" ]; do
-	timedatectl list-timezones | less
-	echo -e "To list localtime options type \"list\""
-	read -p "Continent (e.g Europe): " CONTINENT
-done
-echo -e "\nTo list localtime options type \"list\""
-read -p "City (e.g Zurich): " CITY
-while [ "$CITY" = "list" ]; do
-	timedatectl list-timezones | less
-	echo -e "To list localtime options type \"list\""
-	read -p "City (e.g Zurich): " CITY
-done
-sed -i "16s/.*/LOCALTIME="$CONTINENT"\/"$CITY"/" chroot.sh
-
-echo -e "To list keymap options type \"list\""
-read -p "Keymap (e.g de_CH-latin1): " KEYMAP
-while [ "$KEYMAP" = "list" ]; do
-	echo -e "To list  options type \"list\""
-	localectl list-keymaps
-	read -p "Keymap (e.g de_CH-latin1): " KEYMAP
-done
-sed -i "38s/.*/KEYMAP="$KEYMAP"/" chroot.sh
 
 if [[ -z "$RAM" ]]; then
   RAM=$(free -h|awk '/^Mem:/{print $2}')
@@ -97,8 +85,11 @@ if [[ "$MIRRORLIST" = "y" ]]; then
 fi
 pacstrap /mnt base base-devel
 genfstab -p /mnt >> /mnt/etc/fstab
+
 sed -i "5s/.*/PART_TABLE="$PART_TABLE"/" chroot.sh
-fi
+sed -i "10s/.*/HOSTNAME="$HOSTNAME"/" chroot.sh
+sed -i "16s/.*/LOCALTIME="$ZONE"\/"$SUBZONE"/" chroot.sh
+sed -i "38s/.*/KEYMAP="$KEYMAP"/" chroot.sh
 cp "$PWD"/chroot.sh /mnt
 cp "$PWD"/user_application.sh /mnt
 echo -e "\nType \"./chroot.sh\" to continue the installation."
