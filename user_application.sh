@@ -68,3 +68,4 @@ cd ~
 rm -r build
 EOF
 rm /root/user_application.sh
+echo -e "\nThe installation is complete.\nReboot your machine with \"reboot\" and enjoy!"
