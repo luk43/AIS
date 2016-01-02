@@ -68,7 +68,7 @@ elif [[ "$PART_TABLE" = "gpt" ]]; then
   cp -r /usr/lib/syslinux/efi64/* /boot/EFI/syslinux
 fi
 
-sed -i 's/     APPEND root=\/dev\/sda3 rw/    APPEND root=\/dev\/mapper\/archlinux-rootvol cryptdevice=\/dev\/sda2:archlinux rw/' /boot/syslinux/syslinux.cfg
+sed -i 's/    APPEND root=\/dev\/sda3 rw/    APPEND root=\/dev\/mapper\/archlinux-rootvol cryptdevice=\/dev\/sda2:archlinux rw/' /boot/syslinux/syslinux.cfg
 
 
 
