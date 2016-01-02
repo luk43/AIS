@@ -56,6 +56,11 @@ mkinitcpio -p linux
 echo -e "root password: "
 passwd
 
+while [ "$?" = "1" ]; then
+	echo -e "Try again: "
+	passwd
+done
+
 #--------------------
 #INSTALL BOOTLOADER |
 #--------------------
@@ -69,11 +74,6 @@ elif [[ "$PART_TABLE" = "gpt" ]]; then
 fi
 
 sed -i 's/    APPEND root=\/dev\/sda3 rw/    APPEND root=\/dev\/mapper\/archlinux-rootvol cryptdevice=\/dev\/sda2:archlinux rw/' /boot/syslinux/syslinux.cfg
-
-
-
-#sed -i '54s/.*/    APPEND root=\/dev\/mapper\/archlinux-rootvol cryptdevice=\/dev\/sda2:archlinux rw/' /boot/syslinux/syslinux.cfg
-#sed -i '60s/.*/    APPEND root=\/dev\/mapper\/archlinux-rootvol cryptdevice=\/dev\/sda2:archlinux rw/' /boot/syslinux/syslinux.cfg
 
 echo -e "\nExit from the chroot environment by running exit or pressing Ctrl+D."
 echo -e "\nPartitions will be unmounted automatically by systemd on shutdown.\nYou may however unmount manually as a safety measure with \"umount -R /mnt\" after exiting the chroot environment."

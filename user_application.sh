@@ -5,6 +5,10 @@
 read -p "New username: " USERNAME
 useradd -m -G wheel -s /bin/bash "$USERNAME"
 passwd "$USERNAME"
+while [ "$?" = "1" ]; then
+	echo -e "Try again: "
+	passwd "$USERNAME"
+done
 sed -i 's/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/' /etc/sudoers
 
 #----------
