@@ -21,7 +21,6 @@ read -p "root (/) volume size (e.g 20G): " ROOT
 read -p "Swap volume size (e.g 4G) [empty = auto]: " RAM
 read -p "mbr (BIOS) or gpt (UEFI)?: " PART_TABLE
 read -p "Hostname: " HOSTNAME
-
 if [[ -z "$RAM" ]]; then
   RAM=$(free -h|awk '/^Mem:/{print $2}')
 fi
@@ -46,7 +45,7 @@ elif [[ "$PART_TABLE" = "mbr" ]]; then
 EOF
   mkfs.ext2 /dev/sda1
   else
-    echo "False Partition table (only MBR or GPT)"
+    echo "False Partition table (only mbr or gpt)"
     exit 1
 fi
 
