@@ -86,11 +86,11 @@ fi
 pacstrap /mnt base base-devel
 genfstab -p /mnt >> /mnt/etc/fstab
 
-sed -i "5s/.*/PART_TABLE="$PART_TABLE"/" chroot.sh
-sed -i "10s/.*/HOSTNAME="$HOSTNAME"/" chroot.sh
-sed -i "16s/.*/LOCALTIME="$ZONE"\/"$SUBZONE"/" chroot.sh
-sed -i "38s/.*/KEYMAP="$KEYMAP"/" chroot.sh
-cp "$PWD"/chroot.sh /mnt
-cp "$PWD"/user_application.sh /mnt
+sed -i "5s/.*/PART_TABLE="$PART_TABLE"/" scripts/chroot.sh
+sed -i "10s/.*/HOSTNAME="$HOSTNAME"/" scripts/chroot.sh
+sed -i "16s/.*/LOCALTIME="$ZONE"\/"$SUBZONE"/" scripts/chroot.sh
+sed -i "38s/.*/KEYMAP="$KEYMAP"/" scripts/chroot.sh
+cp "$PWD"/scripts/chroot.sh /mnt
+cp "$PWD"/scripts/user_application.sh /mnt
 echo -e "\nType \"./chroot.sh\" to continue the installation."
 arch-chroot /mnt /bin/bash
