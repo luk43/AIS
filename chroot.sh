@@ -56,7 +56,7 @@ mkinitcpio -p linux
 echo -e "root password: "
 passwd
 
-while [ "$?" = "1" ]; then
+while [ "$?" = "10" ]; do
 	echo -e "Try again: "
 	passwd
 done
