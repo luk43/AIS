@@ -71,6 +71,7 @@ elif [[ "$PART_TABLE" = "gpt" ]]; then
   pacman -S syslinux efibootmgr --noconfirm
   mkdir -p /boot/EFI/syslinux
   cp -r /usr/lib/syslinux/efi64/* /boot/EFI/syslinux
+  efibootmgr -c -d /dev/sda -p 1 -l /EFI/syslinux/syslinux.efi -L "Arch Linux"
 fi
 
 sed -i 's/    APPEND root=\/dev\/sda3 rw/    APPEND root=\/dev\/mapper\/archlinux-rootvol cryptdevice=\/dev\/sda2:archlinux rw/' /boot/syslinux/syslinux.cfg
