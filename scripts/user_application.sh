@@ -26,7 +26,7 @@ fi
 #--------------
 #COMMON STUFF |
 #--------------
-pacman -S --noconfirm vim bash-completion openssh rsync wget bind-tools xf86-input-synaptics networkmanager libmtp mtpfs ntfs-3g dosfstools xfsprogs git cups ghostscript gsfonts
+pacman -S --noconfirm vim bash-completion openssh rsync wget bind-tools xf86-input-synaptics networkmanager libmtp mtpfs ntfs-3g dosfstools xfsprogs git cups ghostscript gsfonts ttf-liberation
 
 #---------------------
 #DESKTOP ENVIRONMENT |
