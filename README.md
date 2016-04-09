@@ -1,17 +1,27 @@
-Arch install script
-===================
-Installs archlinux with a custom GNOME-Stack.
-Disk encryption is included.
+# arch install script
+**Installs archlinux with a custom GNOME-stack.**
 
-You can download the scripts within the bootet archiso with:
-"wget https://gitlab.com/luk_43/ais/repository/archive.tar.gz"
+## get started
+1. wipe your disk (sda)
+2. boot archlinux iso
+3. get the scripts: ```wget https://github.com/luk43/AIS/archive/master.tar.gz && tar xvf master.tar.gz```
+4. change your locale settings in the "install.sh" script to your needs.
+5. change software to your preference in "scripts/user_application.sh" (e.g you don't want GNOME) \*optional
+6. start with ```./install.sh```
 
-Change your locale settings in the install.sh script to your needs
-and start right up with "./install.sh".
+## disk layout
+```
++--------------------------------------------------------------------------------------------+ +----------------+
+| Logical volume1         swap | Logical volume2          xfs | Logical volume3          xfs | |     ext4/fat32 |
+|/dev/mapper/archlinux-swapvol |/dev/mapper/archlinux-rootvol |/dev/mapper/archlinux-homevol | | Boot partition |
+|_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ | |                |
+|                                                                                            | |                |
+|                        LUKS encrypted partition                                            | |                |
+|                          /dev/sda2                                                         | | /dev/sda1      |
++--------------------------------------------------------------------------------------------+ +----------------+
+```
 
-You can change your all your software in "scripts/user_application.sh" to your needs (e.g you don't like GNOME).
-
-Notes
------
-* WLAN is not yet supported during the installation.
-* Make sure that the hard drive is clean / wiped.
+## further notes
+* there is only one disk used (sda)
+* make sure you have network connection through ethernet
+*
