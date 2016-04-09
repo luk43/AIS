@@ -1,4 +1,8 @@
 #!/bin/bash
+#-------------------------------------------------------------------------------
+#PURPOSE OF THIS SCRIPT IS TO CREATE A USER AND INSTALL ALL REQUIRED SOFTWARE. |
+#-------------------------------------------------------------------------------
+
 #-------------
 #CREATE USER |
 #-------------
@@ -11,22 +15,24 @@ while [ "$?" = "10" ]; do
 done
 sed -i 's/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/' /etc/sudoers
 
-#----------
-#Graphics |
-#----------
-read -p "intel, nvidia or amd graphic chip? : " GRAPHICS
+#----------------
+#GRAPHIC DRIVER |
+#----------------
+read -p "\"intel\", \"nvidia\" or \"amd\" graphic chip? : " GRAPHICS
 if [[ "$GRAPHICS" = "intel" ]]; then
-  pacman -S --noconfirm xf86-video-intel mesa-libgl libva-intel-driver libva
+	pacman -S --noconfirm xf86-video-intel mesa-libgl libva-intel-driver libva
 elif [[ "$GRAPHICS" = "nvidia" ]]; then
-  pacman -S --noconfirm xf86-video-nouveau mesa-libgl
+	pacman -S --noconfirm xf86-video-nouveau mesa-libgl
 elif [[ "$GRAPHICS" = "amd" ]]; then
-  pacman -S --noconfirm xf86-video-ati mesa-libgl mesa-vdpau
+	pacman -S --noconfirm xf86-video-ati
+#TIMEZONE; you can find yours with 'tzselect'
+ZONE="Europe"mesa-libgl mesa-vdpau
 fi
 
-#--------------
-#COMMON STUFF |
-#--------------
-pacman -S --noconfirm vim bash-completion openssh rsync wget bind-tools xf86-input-synaptics networkmanager libmtp mtpfs ntfs-3g dosfstools xfsprogs git cups ghostscript gsfonts ttf-liberation
+#------------
+#BASE STUFF |
+#------------
+pacman -S --noconfirm vim bash-completion openssh rsync wget bind-tools xf86-input-synaptics networkmanager libmtp mtpfs ntfs-3g dosfstools git cups ghostscript gsfonts ttf-liberation
 
 #---------------------
 #DESKTOP ENVIRONMENT |
@@ -43,9 +49,9 @@ pacman -S --noconfirm firefox libreoffice-fresh transmission-gtk vinagre
 #-------
 pacman -S --noconfirm gstreamer gstreamermm gstreamer-vaapi x264 x265
 
-#--------
-#CONFIG |
-#--------
+#----------
+#SERVICES |
+#----------
 NETWORK_DEVICE=$(ip a | grep 'state UP' | awk -F': ' '{print $2}')
 systemctl disable dhcpcd@"$NETWORK_DEVICE"
 systemctl enable NetworkManager.service
@@ -71,5 +77,9 @@ makepkg -si --noconfirm
 cd ~
 rm -r build
 EOF
+
+#---------------------
+#AFTER INSTALL TASKS |
+#---------------------
 rm /root/user_application.sh
 echo -e "\nThe installation is complete.\nReboot your machine with \"reboot\" and enjoy!"

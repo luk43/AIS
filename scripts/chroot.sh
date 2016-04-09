@@ -65,20 +65,21 @@ done
 #INSTALL BOOTLOADER |
 #--------------------
 if [[ "$PART_TABLE" = "mbr" ]]; then
-  pacman -S syslinux --noconfirm
-  syslinux-install_update -i -a -m
+	pacman -S syslinux --noconfirm
+	syslinux-install_update -i -a -m
 elif [[ "$PART_TABLE" = "gpt" ]]; then
-  pacman -S syslinux efibootmgr --noconfirm
-  mkdir -p /boot/EFI/syslinux
-  cp -r /usr/lib/syslinux/efi64/* /boot/EFI/syslinux
-  efibootmgr -c -d /dev/sda -p 1 -l /EFI/syslinux/syslinux.efi -L "Arch Linux"
+	pacman -S syslinux efibootmgr --noconfirm
+	mkdir -p /boot/EFI/syslinux
+	cp -r /usr/lib/syslinux/efi64/* /boot/EFI/syslinux
+	efibootmgr -c -d /dev/sda -p 1 -l /EFI/syslinux/syslinux.efi -L "Arch Linux"
 fi
 
 sed -i 's/    APPEND root=\/dev\/sda3 rw/    APPEND root=\/dev\/mapper\/archlinux-rootvol cryptdevice=\/dev\/sda2:archlinux rw/' /boot/syslinux/syslinux.cfg
 
+#-------------------
+#AFTER SETUP TASKS |
+#-------------------
 echo -e "\nExit from the chroot environment by running exit or pressing Ctrl+D."
 echo -e "\nPartitions will be unmounted automatically by systemd on shutdown.\nYou may however unmount manually as a safety measure with \"umount -R /mnt\" after exiting the chroot environment."
 echo -e "\nAfter reboot you can login as root and start with the installation of your software with \"./user_application.sh\""
-cp user_application.sh /root
-rm user_application.sh
 rm chroot.sh
