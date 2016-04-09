@@ -24,4 +24,5 @@
 ## further notes
 * there is only one disk used (sda)
 * make sure you have network connection through ethernet
-*
+* you will give the size of rootvol and swapvol. rest goes to homevol.
+* have fun! :D

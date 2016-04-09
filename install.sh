@@ -16,7 +16,8 @@ KEYMAP="de_CH-latin1"
 #------------------
 #MAIN INFORMATION |
 #------------------
-echo -e "Before you get started here are a few notes.\n* WLAN is not yet supported during the installation.\n* Make sure that the hard drive is clean / wiped.\nhave fun!"
+echo -e "Notes: \n* there is only one disk used (sda)\n* make sure you have network connection through ethernet\n* you will give the size of rootvol and swapvol. rest goes to homevol.\n* have fun! :D"
+echo -e "----------------------------------------------------------------------"
 read -p "root (/) volume size (e.g 20G): " ROOT
 read -p "Swap volume size (e.g 4G) [empty = auto]: " RAM
 read -p "mbr (BIOS) or gpt (UEFI)?: " PART_TABLE
@@ -25,9 +26,9 @@ if [[ -z "$RAM" ]]; then
   RAM=$(free -h|awk '/^Mem:/{print $2}')
 fi
 
-#----------------
-#BOOT PARTITION |
-#----------------
+#-------------------
+#DISK PARTITIONING |
+#-------------------
 if [[ "$PART_TABLE" = "gpt" ]]; then
 	parted /dev/sda <<EOF
 	mklabel gpt
@@ -62,9 +63,9 @@ lvcreate -L "$RAM" archlinux -n swapvol
 lvcreate -L "$ROOT" archlinux -n rootvol
 lvcreate -l +100%FREE archlinux -n homevol
 
-#--------------------------------------
-#PARTITION CREATION AND MOUNT TO /MNT |
-#--------------------------------------
+#---------------------------------------
+#VOLUME PARTITIONING AND MOUNT TO /MNT |
+#---------------------------------------
 mkfs.xfs /dev/mapper/archlinux-rootvol
 mkfs.xfs /dev/mapper/archlinux-homevol
 mkswap /dev/mapper/archlinux-swapvol
