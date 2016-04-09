@@ -2,7 +2,7 @@
 **Installs archlinux with a custom GNOME-stack.**
 
 ## get started
-1. wipe your disk (sda)
+1. wipe your disk (sda). wipe function is included.
 2. boot archlinux iso
 3. get the scripts: ```wget https://github.com/luk43/AIS/archive/master.tar.gz && tar xvf master.tar.gz```
 4. change your locale settings in the "install.sh" script to your needs.
