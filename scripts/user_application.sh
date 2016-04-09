@@ -37,7 +37,7 @@ pacman -S --noconfirm vim bash-completion openssh rsync wget bind-tools xf86-inp
 #---------------------
 #DESKTOP ENVIRONMENT |
 #---------------------
-pacman -S --noconfirm gnome devhelp gedit evolution gnome-builder cheese file-roller gnome-clocks gnome-documents gnome-maps gnome-music gnome-photos gnome-tweak-tool gnome-weather nautilus-sendto seahorse network-manager-applet gvfs-mtp gvfs-google gnome-calendar gnome-characters gnome-initial-setup gnome-getting-started-docs system-config-printer
+pacman -S --noconfirm gnome devhelp gedit evolution gnome-builder cheese file-roller gnome-clocks gnome-documents gnome-maps gnome-music gnome-photos gnome-tweak-tool gnome-weather nautilus-sendto seahorse network-manager-applet gvfs-mtp gvfs-google gnome-calendar gnome-characters gnome-initial-setup gnome-getting-started-docs system-config-printer gnome-software
 
 #--------------
 #APPLICATIONS |
