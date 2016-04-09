@@ -43,7 +43,7 @@ elif [[ "$PART_TABLE" = "mbr" ]]; then
   set 1 boot on
   mkpart primary 513MiB 100%
 EOF
-  mkfs.ext2 /dev/sda1
+  mkfs.ext4 /dev/sda1
   else
     echo "False Partition table (only mbr or gpt)"
     exit 1
@@ -62,8 +62,8 @@ lvcreate -L "$RAM" archlinux -n swapvol
 lvcreate -L "$ROOT" archlinux -n rootvol
 lvcreate -l +100%FREE archlinux -n homevol
 
-mkfs.ext4 /dev/mapper/archlinux-rootvol
-mkfs.ext4 /dev/mapper/archlinux-homevol
+mkfs.xfs /dev/mapper/archlinux-rootvol
+mkfs.xfs /dev/mapper/archlinux-homevol
 mkswap /dev/mapper/archlinux-swapvol
 
 mount /dev/archlinux/rootvol /mnt
