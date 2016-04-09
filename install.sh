@@ -96,6 +96,6 @@ sed -i "10s/.*/HOSTNAME="$HOSTNAME"/" scripts/chroot.sh
 sed -i "16s/.*/LOCALTIME="$ZONE"\/"$SUBZONE"/" scripts/chroot.sh
 sed -i "38s/.*/KEYMAP="$KEYMAP"/" scripts/chroot.sh
 cp "$PWD"/scripts/chroot.sh /mnt
-cp "$PWD"/scripts/user_application.sh /mnt
+cp "$PWD"/scripts/user_application.sh /mnt/root
 echo -e "\nType \"./chroot.sh\" to continue the installation."
 arch-chroot /mnt /bin/bash
