@@ -18,6 +18,16 @@ KEYMAP="de_CH-latin1"
 #------------------
 echo -e "Notes: \n* there is only one disk used (sda)\n* make sure you have network connection through ethernet\n* you will give the size of rootvol and swapvol. rest goes to homevol.\n* have fun! :D"
 echo -e "----------------------------------------------------------------------"
+read -p "wipe disk? (will take a long time) (sda) [y/n]: " WIPE
+if [[ "$WIPE" = "y" ]]; then
+  read -p "random or zero? (random will take much more time) [random/zero]: " CLEAN
+  if [[ "$CLEAN" = "zero" ]]; then
+    dd if=/dev/zero of=/dev/sda bs=1M status=progress
+  elif [[ "$CLEAN" = "random" ]]; then
+    dd if=/dev/urandom of=/dev/sda bs=1M status=progress
+  fi
+fi
+echo -e "\n"
 read -p "root (/) volume size (e.g 20G): " ROOT
 read -p "Swap volume size (e.g 4G) [empty = auto]: " RAM
 read -p "mbr (BIOS) or gpt (UEFI)?: " PART_TABLE
@@ -45,10 +55,11 @@ elif [[ "$PART_TABLE" = "mbr" ]]; then
 	mkpart primary 513MiB 100%
 EOF
   mkfs.ext4 /dev/sda1
-  else
-    echo "False Partition table (only mbr or gpt)"
-    exit 1
+else
+  echo "False Partition table (only mbr or gpt)"
+  exit 1
 fi
+
 
 #----------------------------------------
 #ENCRYPTION AND LOGICAL VOLUME CREATION |
