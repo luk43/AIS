@@ -80,4 +80,4 @@ EOF
 #AFTER INSTALL TASKS |
 #---------------------
 rm /root/user_application.sh
-echo -e "\nThe installation is complete.\nReboot your machine with \"reboot\" and enjoy!"
+echo -e "\nthe installation is complete.\nreboot your machine with \"reboot\" and enjoy!"

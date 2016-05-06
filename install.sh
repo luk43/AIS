@@ -16,7 +16,7 @@ KEYMAP="de_CH-latin1"
 #------------------
 #MAIN INFORMATION |
 #------------------
-echo -e "Notes: \n* there is only one disk used (sda)\n* make sure you have network connection through ethernet\n* you will give the size of rootvol and swapvol. rest goes to homevol.\n* have fun! :D"
+echo -e "notes: \n* there is only one disk used (sda)\n* make sure you have network connection through ethernet\n* you will give the size of rootvol and swapvol and the rest goes to homevol.\n* have fun! :D"
 echo -e "----------------------------------------------------------------------"
 read -p "wipe disk? (will take a long time) (sda) [y/n]: " WIPE
 if [[ "$WIPE" = "y" ]]; then
@@ -29,9 +29,9 @@ if [[ "$WIPE" = "y" ]]; then
 fi
 echo -e "\n"
 read -p "root (/) volume size (e.g 20G): " ROOT
-read -p "Swap volume size (e.g 4G) [empty = auto]: " RAM
+read -p "swap volume size (e.g 4G) [empty = auto]: " RAM
 read -p "mbr (BIOS) or gpt (UEFI)?: " PART_TABLE
-read -p "Hostname: " HOSTNAME
+read -p "hostname: " HOSTNAME
 if [[ -z "$RAM" ]]; then
   RAM=$(free -h|awk '/^Mem:/{print $2}')
 fi
@@ -56,7 +56,7 @@ elif [[ "$PART_TABLE" = "mbr" ]]; then
 EOF
   mkfs.ext4 /dev/sda1
 else
-  echo "False Partition table (only mbr or gpt)"
+  echo "false Partition table (only mbr or gpt)"
   exit 1
 fi
 
@@ -64,7 +64,7 @@ fi
 #----------------------------------------
 #ENCRYPTION AND LOGICAL VOLUME CREATION |
 #----------------------------------------
-echo -e "First type \"YES\" and then enter the chosen password for /dev/sda2 twice and once to unlock."
+echo -e "first type \"YES\" and then enter the chosen password for /dev/sda2 twice and once to unlock."
 cryptsetup -v --cipher aes-xts-plain64 --key-size 512 --hash sha512 --iter-time 5000 --use-random luksFormat /dev/sda2
 cryptsetup open --type luks /dev/sda2 lvm
 pvcreate /dev/mapper/lvm
@@ -93,7 +93,7 @@ mount /dev/sda1 /mnt/boot
 #INSTALLATION |
 #--------------
 echo -e "\n"
-read -p "Do you want to make changes to the pacman mirrorlist? [y/n]: " MIRRORLIST
+read -p "do you want to make changes to the pacman mirrorlist? [y/n]: " MIRRORLIST
 if [[ "$MIRRORLIST" = "y" ]]; then
 	vim /etc/pacman.d/mirrorlist
 fi

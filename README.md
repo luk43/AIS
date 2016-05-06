@@ -2,10 +2,10 @@
 **Installs archlinux with a custom GNOME-stack.**
 
 ## get started
-1. wipe your disk (sda). wipe function is included.
+1. wipe your disk (sda) -> wipe function is included
 2. boot archlinux iso
 3. get the scripts: ```wget https://github.com/luk43/AIS/archive/master.tar.gz && tar xvf master.tar.gz```
-4. change your locale settings in the "install.sh" script to your needs.
+4. change your locale settings in the "install.sh" script to your needs
 5. change software to your preference in "scripts/user_application.sh" (e.g you don't want GNOME) \*optional
 6. start with ```./install.sh```
 
@@ -24,5 +24,5 @@
 ## further notes
 * there is only one disk used (sda)
 * make sure you have network connection through ethernet
-* you will give the size of rootvol and swapvol. rest goes to homevol.
+* you will give the size of rootvol and swapvol and rest goes to homevol
 * have fun! :D
