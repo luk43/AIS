@@ -65,13 +65,11 @@ su "$USERNAME" <<EOF
 cd ~
 mkdir build
 cd build
-wget https://aur.archlinux.org/cgit/aur.git/snapshot/package-query.tar.gz
-tar zxvf package-query.tar.gz
+git clone https://aur.archlinux.org/package-query.git
 cd package-query
 makepkg -si --noconfirm
 cd ..
-wget https://aur.archlinux.org/cgit/aur.git/snapshot/yaourt.tar.gz
-tar zxvf yaourt.tar.gz
+git clone https://aur.archlinux.org/yaourt.git
 cd yaourt
 makepkg -si --noconfirm
 cd ~
