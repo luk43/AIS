@@ -73,7 +73,7 @@ git clone https://aur.archlinux.org/yaourt.git
 cd yaourt
 makepkg -si --noconfirm
 cd ~
-rm -r build
+rm -rf ~/build
 EOF
 
 #---------------------
