@@ -6,11 +6,11 @@
 #-------------
 #CREATE USER |
 #-------------
-read -p "New username: " USERNAME
+read -p "new username: " USERNAME
 useradd -m -G wheel -s /bin/bash "$USERNAME"
 passwd "$USERNAME"
 while [ "$?" = "10" ]; do
-	echo -e "Try again: "
+	echo -e "try again: "
 	passwd "$USERNAME"
 done
 sed -i 's/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/' /etc/sudoers
@@ -24,9 +24,7 @@ if [[ "$GRAPHICS" = "intel" ]]; then
 elif [[ "$GRAPHICS" = "nvidia" ]]; then
 	pacman -S --noconfirm xf86-video-nouveau mesa-libgl
 elif [[ "$GRAPHICS" = "amd" ]]; then
-	pacman -S --noconfirm xf86-video-ati
-#TIMEZONE; you can find yours with 'tzselect'
-ZONE="Europe"mesa-libgl mesa-vdpau
+	pacman -S --noconfirm xf86-video-ati mesa-libgl mesa-vdpau
 fi
 
 #------------
