@@ -53,11 +53,11 @@ mkinitcpio -p linux
 #-------------------
 #SET ROOT PASSWORD |
 #-------------------
-echo -e "root password: "
+echo -e "create root password: "
 passwd
 
 while [ "$?" = "10" ]; do
-	echo -e "Try again: "
+	echo -e "try again: "
 	passwd
 done
 
@@ -79,7 +79,7 @@ sed -i 's/    APPEND root=\/dev\/sda3 rw/    APPEND root=\/dev\/mapper\/archlinu
 #-------------------
 #AFTER SETUP TASKS |
 #-------------------
-echo -e "\nExit from the chroot environment by running exit or pressing Ctrl+D."
-echo -e "\nPartitions will be unmounted automatically by systemd on shutdown.\nYou may however unmount manually as a safety measure with \"umount -R /mnt\" after exiting the chroot environment."
-echo -e "\nAfter reboot you can login as root and start with the installation of your software with \"./user_application.sh\""
+echo -e "\nexit from the chroot environment by running exit or pressing Ctrl+D"
+echo -e "\npartitions will be unmounted automatically by systemd on shutdown\nYou may however unmount manually as a safety measure with \"umount -R /mnt\" after exiting the chroot environment"
+echo -e "\nafter reboot you can login as root and start with the installation of your software with \"./user_application.sh\""
 rm chroot.sh

@@ -16,7 +16,7 @@ KEYMAP="de_CH-latin1"
 #------------------
 #MAIN INFORMATION |
 #------------------
-echo -e "notes: \n* there is only one disk used (sda)\n* make sure you have network connection through ethernet\n* you will give the size of rootvol and swapvol and the rest goes to homevol.\n* have fun! :D"
+echo -e "notes: \n* there is only one disk used (sda)\n* make sure you have network connection through ethernet\n* you will give the size of rootvol and swapvol and the rest goes to homevol\n* have fun! :D"
 echo -e "----------------------------------------------------------------------"
 read -p "wipe disk? (will take a long time) (sda) [y/n]: " WIPE
 if [[ "$WIPE" = "y" ]]; then
@@ -109,5 +109,5 @@ sed -i "16s/.*/LOCALTIME="$ZONE"\/"$SUBZONE"/" scripts/chroot.sh
 sed -i "38s/.*/KEYMAP="$KEYMAP"/" scripts/chroot.sh
 cp "$PWD"/scripts/chroot.sh /mnt
 cp "$PWD"/scripts/user_application.sh /mnt/root
-echo -e "\nType \"./chroot.sh\" to continue the installation."
+echo -e "\ntype \"./chroot.sh\" to continue the installation"
 arch-chroot /mnt /bin/bash
