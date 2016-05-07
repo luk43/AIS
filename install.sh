@@ -60,7 +60,6 @@ else
   exit 1
 fi
 
-
 #----------------------------------------
 #ENCRYPTION AND LOGICAL VOLUME CREATION |
 #----------------------------------------
