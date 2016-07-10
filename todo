@@ -1,0 +1,34 @@
+--------------
+APPLICATIONS |
+--------------
+make lists of these things.
+
+|DESKTOP
+
+-
+devhelp
+gnome-builder
+According to: https://www.archlinux.org/groups/x86_64/gnome/
+is gvfs-google and gvfs-mtp already in the group.
+system-config-printer
+
+|BASE
+
++
+nmap
+
+------
+CUPS |
+------
+
+All the Printer stuff has to be reinvented.
+
+--------
+YAOURT |
+--------
+Yaourt has to be updated??  not sure...
+
+------------
+CRYPTSETUP |
+------------
+Make safety feature for encrypton pw
