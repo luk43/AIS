@@ -30,7 +30,7 @@ fi
 #------------
 #BASE STUFF |
 #------------
-pacman -S --noconfirm bash-completion bind-tools cups dosfstools ghostscript git gsfonts libmtp mtpfs networkmanager ntfs-3g openssh rsync ttf-liberation vim wget xf86-input-synaptics
+pacman -S --noconfirm bash-completion bind-tools cups dosfstools ghostscript git gsfonts libmtp mtpfs networkmanager nmap ntfs-3g openssh rsync ttf-liberation vim wget xf86-input-synaptics
 
 #---------------------
 #DESKTOP ENVIRONMENT |
