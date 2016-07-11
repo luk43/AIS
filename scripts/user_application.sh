@@ -30,12 +30,12 @@ fi
 #------------
 #BASE STUFF |
 #------------
-pacman -S --noconfirm vim bash-completion openssh rsync wget bind-tools xf86-input-synaptics networkmanager libmtp mtpfs ntfs-3g dosfstools git cups ghostscript gsfonts ttf-liberation
+pacman -S --noconfirm bash-completion bind-tools cups dosfstools ghostscript git gsfonts libmtp mtpfs networkmanager ntfs-3g openssh rsync ttf-liberation vim wget xf86-input-synaptics
 
 #---------------------
 #DESKTOP ENVIRONMENT |
 #---------------------
-pacman -S --noconfirm gnome devhelp gedit evolution gnome-builder cheese file-roller gnome-clocks gnome-documents gnome-maps gnome-music gnome-photos gnome-tweak-tool gnome-weather nautilus-sendto seahorse network-manager-applet gvfs-mtp gvfs-google gnome-calendar gnome-characters gnome-initial-setup gnome-getting-started-docs system-config-printer telepathy gnome-software
+pacman -S --noconfirm cheese devhelp evolution file-roller gedit gnome gnome-builder gnome-calendar gnome-characters gnome-clocks gnome-documents gnome-getting-started-docs gnome-initial-setup gnome-maps gnome-music gnome-photos gnome-software gnome-tweak-tool gnome-weather gvfs-google gvfs-mtp nautilus-sendto network-manager-applet seahorse system-config-printer telepathy
 
 #--------------
 #APPLICATIONS |
@@ -45,7 +45,7 @@ pacman -S --noconfirm firefox libreoffice-fresh transmission-gtk vinagre
 #-------
 #MEDIA |
 #-------
-pacman -S --noconfirm gstreamer gstreamermm gstreamer-vaapi x264 x265
+pacman -S --noconfirm gstreamer gstreamer-vaapi gstreamermm x264 x265
 
 #----------
 #SERVICES |
@@ -78,4 +78,4 @@ EOF
 #AFTER INSTALL TASKS |
 #---------------------
 rm /root/user_application.sh
-echo -e "\nthe installation is complete.\nreboot your machine with \"reboot\" and enjoy!"
+echo -e "\nthe installation is complete\nreboot your machine with \"reboot\" and enjoy!"
