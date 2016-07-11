@@ -35,7 +35,7 @@ pacman -S --noconfirm bash-completion bind-tools cups dosfstools ghostscript git
 #---------------------
 #DESKTOP ENVIRONMENT |
 #---------------------
-pacman -S --noconfirm cheese devhelp evolution file-roller gedit gnome gnome-builder gnome-calendar gnome-characters gnome-clocks gnome-documents gnome-getting-started-docs gnome-initial-setup gnome-maps gnome-music gnome-photos gnome-software gnome-tweak-tool gnome-weather gvfs-google gvfs-mtp nautilus-sendto network-manager-applet seahorse system-config-printer telepathy
+pacman -S --noconfirm cheese evolution file-roller gedit gnome gnome-calendar gnome-characters gnome-clocks gnome-documents gnome-getting-started-docs gnome-initial-setup gnome-maps gnome-music gnome-photos gnome-software gnome-tweak-tool gnome-weather nautilus-sendto network-manager-applet seahorse telepathy
 
 #--------------
 #APPLICATIONS |
