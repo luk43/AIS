@@ -24,7 +24,7 @@ if [[ "$GRAPHICS" = "intel" ]]; then
 elif [[ "$GRAPHICS" = "nvidia" ]]; then
 	pacman -S --noconfirm xf86-video-nouveau mesa-libgl
 elif [[ "$GRAPHICS" = "amd" ]]; then
-	pacman -S --noconfirm xf86-video-ati mesa-libgl mesa-vdpau
+	pacman -S --noconfirm xf86-video-ati mesa-libgl
 fi
 
 #------------
