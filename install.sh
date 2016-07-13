@@ -65,7 +65,16 @@ fi
 #----------------------------------------
 echo -e "first type \"YES\" and then enter the chosen password for /dev/sda2 twice and once to unlock."
 cryptsetup -v --cipher aes-xts-plain64 --key-size 512 --hash sha512 --iter-time 5000 --use-random luksFormat /dev/sda2
+	while [ "$?" = "2" ]; do
+		echo -e "try again: "
+		cryptsetup -v --cipher aes-xts-plain64 --key-size 512 --hash sha512 --iter-time 5000 --use-random luksFormat /dev/sda2
+	done
 cryptsetup open --type luks /dev/sda2 lvm
+	while [ "$?" = "2" ]; do
+		echo -e "try again: "
+		cryptsetup open --type luks /dev/sda2 lvm
+	done
+
 pvcreate /dev/mapper/lvm
 vgcreate archlinux /dev/mapper/lvm
 
