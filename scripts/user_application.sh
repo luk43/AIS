@@ -20,7 +20,7 @@ sed -i 's/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/' /etc/sudoers
 #----------------
 read -p "\"intel\", \"nvidia\" or \"amd\" graphic chip? : " GRAPHICS
 if [[ "$GRAPHICS" = "intel" ]]; then
-	pacman -S --noconfirm xf86-video-intel mesa-libgl libva-intel-driver libva
+	pacman -S --noconfirm xf86-video-intel mesa-libgl libva-intel-driver
 elif [[ "$GRAPHICS" = "nvidia" ]]; then
 	pacman -S --noconfirm xf86-video-nouveau mesa-libgl
 elif [[ "$GRAPHICS" = "amd" ]]; then
@@ -45,7 +45,7 @@ pacman -S --noconfirm firefox libreoffice-fresh transmission-gtk vinagre
 #-------
 #MEDIA |
 #-------
-pacman -S --noconfirm gstreamer gstreamer-vaapi gstreamermm x264 x265
+pacman -S --noconfirm gstreamer gstreamer-vaapi gstreamermm libva x264 x265
 
 #----------
 #SERVICES |
