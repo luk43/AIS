@@ -27,6 +27,11 @@ elif [[ "$GRAPHICS" = "amd" ]]; then
 	pacman -S --noconfirm xf86-video-ati mesa-libgl
 fi
 
+#-----------------------------
+#UPDATE PACMAN PACKAGE CACHE |
+#-----------------------------
+pacman -Syy
+
 #------------
 #BASE STUFF |
 #------------
