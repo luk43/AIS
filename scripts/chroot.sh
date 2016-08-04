@@ -65,8 +65,9 @@ done
 #INSTALL BOOTLOADER |
 #--------------------
 if [[ "$PART_TABLE" = "mbr" ]]; then
-	pacman -S syslinux --noconfirm
-	syslinux-install_update -i -a -m
+	pacman -S grub os-prober --noconfirm
+	grub-install --target=i386-pc --recheck /dev/sda
+	grub-mkconfig -o /boot/grub/grub.cfg
 elif [[ "$PART_TABLE" = "gpt" ]]; then
 	pacman -S syslinux efibootmgr --noconfirm
 	mkdir -p /boot/EFI/syslinux
