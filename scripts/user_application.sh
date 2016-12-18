@@ -82,5 +82,6 @@ EOF
 #---------------------
 #AFTER INSTALL TASKS |
 #---------------------
-rm /root/user_application.sh
+echo -e "\ninfo: if UEFI boot is enabled, it is recommended to install \"systemd-boot-pacman-hook\"\nfor more infos: https://wiki.archlinux.org/index.php/Systemd-boot#Automatically"
 echo -e "\nthe installation is complete\nreboot your machine with \"reboot\" and enjoy!"
+rm /root/user_application.sh

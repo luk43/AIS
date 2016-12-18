@@ -70,10 +70,9 @@ if [[ "$PART_TABLE" = "mbr" ]]; then
 	sed -i 's/GRUB_CMDLINE_LINUX=\"\"/GRUB_CMDLINE_LINUX=\"cryptdevice=\/dev\/sda2:archlinux root=\/dev\/mapper\/archlinux-rootvol\"/' /etc/default/grub
 	grub-mkconfig -o /boot/grub/grub.cfg
 elif [[ "$PART_TABLE" = "gpt" ]]; then
-	bootctl --path=esp install
-	sed -i 'S/default  arch/default  archlinux' /boot/EFI/loader/loader.conf
-	echo -e "title archlinux\nlinux /vmlinuz-linux\ninitrd /initramfs-linux.img\noptions cryptdevice=/dev/sda2:archlinux root=/dev/mapper/archlinux-rootvol rw" > /boot/EFI/loader/entries/archlinux.conf
-	bootctl --path=esp update
+	bootctl --path=/boot install
+	echo -e "default  archlinux\ntimeout  3\neditor   0" > /boot/loader/loader.conf
+	echo -e "title archlinux\nlinux /vmlinuz-linux\ninitrd /initramfs-linux.img\noptions cryptdevice=/dev/sda2:archlinux root=/dev/mapper/archlinux-rootvol rw" > /boot/loader/entries/archlinux.conf
 fi
 
 #-------------------
