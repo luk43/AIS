@@ -12,7 +12,7 @@ KEYMAP="de_CH-latin1"
 
 #DON'T CHANGE ANYTHING BELOW THE LINE
 #-------------------------------------------------------------------------------
-
+timedatectl set-ntp true
 #------------------
 #MAIN INFORMATION |
 #------------------
@@ -106,15 +106,15 @@ if [[ "$MIRRORLIST" = "y" ]]; then
 	vim /etc/pacman.d/mirrorlist
 fi
 pacstrap /mnt base base-devel
-genfstab -p /mnt >> /mnt/etc/fstab
+genfstab -U /mnt >> /mnt/etc/fstab
 
 #---------------------
 #AFTER INSTALL TASKS |
 #---------------------
 sed -i "5s/.*/PART_TABLE="$PART_TABLE"/" scripts/chroot.sh
 sed -i "10s/.*/HOSTNAME="$HOSTNAME"/" scripts/chroot.sh
-sed -i "16s/.*/LOCALTIME="$ZONE"\/"$SUBZONE"/" scripts/chroot.sh
-sed -i "38s/.*/KEYMAP="$KEYMAP"/" scripts/chroot.sh
+sed -i "17s/.*/LOCALTIME="$ZONE"\/"$SUBZONE"/" scripts/chroot.sh
+sed -i "24s/.*/KEYMAP="$KEYMAP"/" scripts/chroot.sh
 cp "$PWD"/scripts/chroot.sh /mnt
 cp "$PWD"/scripts/user_application.sh /mnt/root
 echo -e "\ntype \"./chroot.sh\" to continue the installation"
