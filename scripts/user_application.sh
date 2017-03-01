@@ -35,7 +35,7 @@ fi
 #------------
 #BASE STUFF |
 #------------
-pacman -S --noconfirm bash-completion bind-tools cups dosfstools foomatic-db-gutenprint foomatic-db-gutenprint-ppds ghostscript git gsfonts gutenprint libinput libmtp mtpfs networkmanager nmap ntfs-3g openssh rsync ttf-liberation vim wget xf86-input-libinput
+pacman -S --noconfirm bash-completion bind-tools cups dosfstools foomatic-db foomatic-db-engine foomatic-db-nonfree-ppds foomatic-db-gutenprint-ppds ghostscript git gsfonts gutenprint libinput libmtp mtpfs networkmanager nmap ntfs-3g openssh rsync ttf-liberation vim wget xf86-input-libinput
 
 #---------------------
 #DESKTOP ENVIRONMENT |
