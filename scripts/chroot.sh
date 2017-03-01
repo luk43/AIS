@@ -9,7 +9,7 @@
 #----------------------------------------------------
 
 echo "$HOSTNAME" > /etc/hostname
-sed -i "8s/.*/127.0.1.1    "$HOSTNAME".localdomain  "$HOSTNAME"/" /etc/hosts
+sed -i "8s/.*/127.0.1.1		"$HOSTNAME".localdomain	"$HOSTNAME"/" /etc/hosts
 
 #-----------------------------------------------------
 #SET LOCALTIME, IT WILL PASTED HERE  FROM install.sh |
