@@ -40,7 +40,7 @@ pacman -S --noconfirm bash-completion bind-tools cups dosfstools foomatic-db foo
 #---------------------
 #DESKTOP ENVIRONMENT |
 #---------------------
-pacman -S --noconfirm cheese evolution file-roller gedit gnome gnome-calendar gnome-characters gnome-clocks gnome-documents gnome-getting-started-docs gnome-initial-setup gnome-maps gnome-music gnome-photos gnome-software gnome-tweak-tool gnome-weather nautilus-sendto network-manager-applet polkit-gnome seahorse telepathy
+pacman -S --noconfirm evolution file-roller gedit gnome gnome-calendar gnome-characters gnome-clocks gnome-documents gnome-getting-started-docs gnome-initial-setup gnome-maps gnome-music gnome-photos gnome-software gnome-tweak-tool gnome-weather nautilus-sendto network-manager-applet polkit-gnome seahorse telepathy
 
 #--------------
 #APPLICATIONS |
