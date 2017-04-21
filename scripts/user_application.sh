@@ -47,7 +47,7 @@ pacman -S --noconfirm transmission-gtk vinagre
 #-------
 #MEDIA |
 #-------
-pacman -S --noconfirm gstreamer x264 x265
+pacman -S --noconfirm gstreamer gst-libav gst-plugins-base x264 x265
 
 #----------
 #SERVICES |
