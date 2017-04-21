@@ -36,7 +36,7 @@ systemctl enable dhcpcd@"$NETWORK_DEVICE"
 #----------------
 #SET MKINITCPIO |
 #----------------
-sed -i 's/HOOKS="base udev autodetect modconf block filesystems keyboard fsck"/HOOKS="base udev autodetect modconf block keymap encrypt lvm2 filesystems keyboard fsck"/' /etc/mkinitcpio.conf
+sed -i 's/HOOKS="base udev autodetect modconf block filesystems keyboard fsck"/HOOKS="base udev autodetect modconf keyboard block keymap encrypt lvm2 filesystems fsck"/' /etc/mkinitcpio.conf
 mkinitcpio -p linux
 
 #-------------------
@@ -53,16 +53,17 @@ done
 #--------------------
 #INSTALL BOOTLOADER |
 #--------------------
+UUID=$(blkid /dev/sda2 | cut -d'"' -f2)
 if [[ "$PART_TABLE" = "mbr" ]]; then
 	pacman -S grub --noconfirm
 	grub-install --target=i386-pc --recheck /dev/sda
-	sed -i 's/GRUB_CMDLINE_LINUX=\"\"/GRUB_CMDLINE_LINUX=\"cryptdevice=\/dev\/sda2:archlinux root=\/dev\/mapper\/archlinux-rootvol\"/' /etc/default/grub
+	sed -i 's/GRUB_CMDLINE_LINUX=\"\"/GRUB_CMDLINE_LINUX=\"cryptdevice=UUID="$UUID":archlinux root=\/dev\/mapper\/archlinux-rootvol\"/' /etc/default/grub
 	grub-mkconfig -o /boot/grub/grub.cfg
 	pacman -S intel-ucode --noconfirm
 elif [[ "$PART_TABLE" = "gpt" ]]; then
 	bootctl --path=/boot install
 	echo -e "default  archlinux\ntimeout  3\neditor   0" > /boot/loader/loader.conf
-	echo -e "title archlinux\nlinux /vmlinuz-linux\ninitrd /initramfs-linux.img\noptions cryptdevice=/dev/sda2:archlinux root=/dev/mapper/archlinux-rootvol rw" > /boot/loader/entries/archlinux.conf
+	echo -e "title archlinux\nlinux /vmlinuz-linux\ninitrd /initramfs-linux.img\noptions cryptdevice=UUID="${UUID}":archlinux root=/dev/mapper/archlinux-rootvol rw" > /boot/loader/entries/archlinux.conf
 	pacman -S intel-ucode --noconfirm
 fi
 
