@@ -28,6 +28,7 @@ if [[ "$GRAPHICS" = "intel" ]]; then
 	pacman -S --noconfirm gstreamer-vaapi libva libva-intel-driver mesa
 elif [[ "$GRAPHICS" = "nvidia" ]]; then
 	pacman -S --noconfirm gst-plugins-bad mesa-vdpau nvidia
+fi
 
 #------------
 #BASE STUFF |
