@@ -23,19 +23,16 @@ pacman -Syy
 #----------------
 #GRAPHIC DRIVER |
 #----------------
-read -p "\"intel\", \"nvidia\" or \"amd\" graphic chip? : " GRAPHICS
+read -p "\"intel\" or \"nvidia\" or graphic chip? : " GRAPHICS
 if [[ "$GRAPHICS" = "intel" ]]; then
-	pacman -S --noconfirm xf86-video-intel mesa-libgl libva-intel-driver
+	pacman -S --noconfirm gstreamer-vaapi libva libva-intel-driver mesa
 elif [[ "$GRAPHICS" = "nvidia" ]]; then
-	pacman -S --noconfirm xf86-video-nouveau mesa-libgl
-elif [[ "$GRAPHICS" = "amd" ]]; then
-	pacman -S --noconfirm xf86-video-ati mesa-libgl
-fi
+	pacman -S --noconfirm gst-plugins-bad mesa-vdpau nvidia
 
 #------------
 #BASE STUFF |
 #------------
-pacman -S --noconfirm bash-completion bind-tools cups dosfstools foomatic-db foomatic-db-engine foomatic-db-nonfree-ppds foomatic-db-gutenprint-ppds ghostscript git gsfonts gutenprint libinput libmtp mtpfs networkmanager nmap ntfs-3g openssh rsync ttf-liberation vim wget xf86-input-libinput
+pacman -S --noconfirm bash-completion bind-tools cups dosfstools foomatic-db foomatic-db-engine foomatic-db-nonfree-ppds foomatic-db-gutenprint-ppds ghostscript git gsfonts gutenprint libinput libmtp mtpfs networkmanager ntfs-3g openssh rsync vim wget xf86-input-libinput
 
 #---------------------
 #DESKTOP ENVIRONMENT |
@@ -45,12 +42,12 @@ pacman -S --noconfirm evolution file-roller gedit gnome gnome-calendar gnome-cha
 #--------------
 #APPLICATIONS |
 #--------------
-pacman -S --noconfirm firefox libreoffice-fresh transmission-gtk vinagre
+pacman -S --noconfirm transmission-gtk vinagre
 
 #-------
 #MEDIA |
 #-------
-pacman -S --noconfirm gstreamer gstreamer-vaapi gstreamermm libva x264 x265
+pacman -S --noconfirm gstreamer gstreamer-vaapi libva x264 x265
 
 #----------
 #SERVICES |
@@ -83,5 +80,6 @@ EOF
 #AFTER INSTALL TASKS |
 #---------------------
 echo -e "\ninfo: if UEFI boot is enabled, it is recommended to install \"systemd-boot-pacman-hook\"\nfor more infos: https://wiki.archlinux.org/index.php/Systemd-boot#Automatically"
+echo -e "\ninfo: if NVIDIA card is installed, please install \"nouveau-fw\"\nfor more infos: https://wiki.archlinux.org/index.php/Nvidia"
 echo -e "\nthe installation is complete\nreboot your machine with \"reboot\" and enjoy!"
 rm /root/user_application.sh
