@@ -58,7 +58,7 @@ PARTUUID=$(blkid /dev/mapper/archlinux-rootvol | cut -d'"' -f2)
 if [[ "$PART_TABLE" = "mbr" ]]; then
 	pacman -S grub --noconfirm
 	grub-install --target=i386-pc --recheck /dev/sda
-	sed -i "s/GRUB_CMDLINE_LINUX=\"\"/GRUB_CMDLINE_LINUX=\"cryptdevice=UUID="$UUID":archlinux root=PARTUUID="$PARTUUID"\"/" /etc/default/grub
+	sed -i "s/GRUB_CMDLINE_LINUX=\"\"/GRUB_CMDLINE_LINUX=\"cryptdevice=UUID="$UUID":archlinux root="$PARTUUID"\"/" /etc/default/grub
 	grub-mkconfig -o /boot/grub/grub.cfg
 	pacman -S intel-ucode --noconfirm
 elif [[ "$PART_TABLE" = "gpt" ]]; then
