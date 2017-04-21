@@ -53,18 +53,18 @@ done
 #--------------------
 #INSTALL BOOTLOADER |
 #--------------------
-UUID=$(blkid /dev/sda2 | cut -d'"' -f2)
-PARTUUID=$(blkid /dev/mapper/archlinux-rootvol | cut -d'"' -f2)
+DISKUUID=$(blkid /dev/sda2 | cut -d'"' -f2)
+ROOTUUID=$(blkid /dev/mapper/archlinux-rootvol | cut -d'"' -f2)
 if [[ "$PART_TABLE" = "mbr" ]]; then
 	pacman -S grub --noconfirm
 	grub-install --target=i386-pc --recheck /dev/sda
-	sed -i "s/GRUB_CMDLINE_LINUX=\"\"/GRUB_CMDLINE_LINUX=\"cryptdevice=UUID="$UUID":archlinux root="$PARTUUID"\"/" /etc/default/grub
+	sed -i "s/GRUB_CMDLINE_LINUX=\"\"/GRUB_CMDLINE_LINUX=\"cryptdevice=UUID="$DISKUUID":archlinux root=UUID="$ROOTUUID"\"/" /etc/default/grub
 	grub-mkconfig -o /boot/grub/grub.cfg
 	pacman -S intel-ucode --noconfirm
 elif [[ "$PART_TABLE" = "gpt" ]]; then
 	bootctl --path=/boot install
 	echo -e "default  archlinux\ntimeout  3\neditor   0" > /boot/loader/loader.conf
-	echo -e "title archlinux\nlinux /vmlinuz-linux\ninitrd /initramfs-linux.img\noptions cryptdevice=UUID="${UUID}":archlinux root=PARTUUID="${PARTUUID}" rw" > /boot/loader/entries/archlinux.conf
+	echo -e "title archlinux\nlinux /vmlinuz-linux\ninitrd /initramfs-linux.img\noptions cryptdevice=UUID="${DISKUUID}":archlinux root=UUID="${ROOTUUID}" rw" > /boot/loader/entries/archlinux.conf
 	pacman -S intel-ucode --noconfirm
 fi
 
