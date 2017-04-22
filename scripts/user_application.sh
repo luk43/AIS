@@ -6,7 +6,7 @@
 #-------------
 #CREATE USER |
 #-------------
-read -p "new username: " USERNAME
+read -p "New username: " USERNAME
 useradd -m -G wheel -s /bin/bash "$USERNAME"
 passwd "$USERNAME"
 while [ "$?" = "10" ]; do
@@ -23,7 +23,7 @@ pacman -Syy
 #----------------
 #GRAPHIC DRIVER |
 #----------------
-read -p "\"intel\" or \"nvidia\" or graphic chip? : " GRAPHICS
+read -p "\"intel\" or \"nvidia\" graphic chip? : " GRAPHICS
 if [[ "$GRAPHICS" = "intel" ]]; then
 	pacman -S --noconfirm gstreamer-vaapi libva libva-intel-driver mesa
 elif [[ "$GRAPHICS" = "nvidia" ]]; then
