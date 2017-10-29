@@ -1,3 +1,5 @@
+# not maintained anymore 
+
 # arch install script
 **Installs archlinux with a custom GNOME-stack.**
 
